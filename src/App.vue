@@ -1,15 +1,15 @@
 <template>
-  <Quiz />
+  <QuizView />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Quiz from '@/components/Quiz.vue'
+import QuizView from '@/components/QuizView.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    Quiz
+    QuizView
   }
 })
 </script>

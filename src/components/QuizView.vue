@@ -11,12 +11,8 @@ import { defineComponent } from 'vue'
 import QuizStart from '@/components/QuizStart.vue'
 
 export default defineComponent({
-  name: 'HelloWorld',
   components: {
     QuizStart
-  },
-  props: {
-    msg: String
   }
 })
 </script>
