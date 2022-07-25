@@ -1,5 +1,6 @@
 <template>
   <div class="question">
+    <QuizProgress :currentQuestionIndex="currentQuestion.id" />
     <h3
       class="question__header question-header"
       v-html="currentQuestion.question"
@@ -25,6 +26,7 @@ import { computed, Ref, ref } from 'vue'
 import { shuffleArray } from '@/utils/ArrayHelpers'
 import { useStore } from 'vuex'
 import { Answer } from '@/types/answer'
+import QuizProgress from '@/components/QuizQuestions/QuizProgress.vue'
 
 const props = defineProps({
   currentQuestion: {
