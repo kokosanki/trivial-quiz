@@ -1,5 +1,5 @@
 <template>
-  <div class="quiz-start">
+  <div class="quiz-start wrapper-component">
     <AppHeader />
     <h2 class="quiz-start__header">Dare to check your knowledge?</h2>
     <q-spinner-ball
@@ -65,6 +65,7 @@ import { QType } from '@/types/type'
 import { QuestionsResponse, Question } from '@/types/question'
 import { showCodedError, showBasicError } from '@/utils/NotificationsHandler'
 import { useStore } from 'vuex'
+const emit = defineEmits(['changeActiveComponent'])
 
 const store = useStore()
 
@@ -126,6 +127,10 @@ onMounted(() => {
   getCategories()
 })
 
+const displayNextComponent = ():void => {
+  emit('changeActiveComponent', 'QuizQuestions')
+}
+
 const setQuestions = (questions: Question[]) => {
   store.commit('setQuestions', questions)
 }
@@ -142,6 +147,7 @@ const onSubmit = async () => {
       showCodedError(questions.value?.response_code)
     } else {
       setQuestions(questions.value?.results)
+      displayNextComponent()
     }
   } catch (err) {
     console.error(err)
@@ -155,7 +161,6 @@ const onSubmit = async () => {
 
 <style lang="scss" scoped>
 .quiz-start {
-  padding: 20px;
   &__header {
     font-size: $prominent;
     color: $accent;
@@ -166,10 +171,6 @@ const onSubmit = async () => {
 }
 @media screen and (min-width: 1024px) {
   .quiz-start {
-    background-color: $dark;
-    width: 850px;
-    border-radius: 15px;
-    padding: 40px;
     &__form {
       margin-top: 20px;
     }

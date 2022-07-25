@@ -5,6 +5,8 @@ export type Question = {
   question: string
   correct_answer: string
   incorrect_answers: string[]
+  userAnswer?: string
+  id?: number
 }
 
 export interface QuestionsResponse {
