@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-component">
     <QuizQuestion :currentQuestion="currentQuestion" />
-    <NavigationButtons :currentQuestionIndex="currentQuestionIndex" @next="next" @back="back" @submitQuiz="submitQuiz" />
+    <NavigationButtons :currentQuestion="currentQuestion" :currentQuestionIndex="currentQuestionIndex" @next="next" @back="back" @submitQuiz="submitQuiz" />
   </div>
 </template>
 
