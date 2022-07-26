@@ -2,7 +2,7 @@
   <div class="navigation-buttons">
     <q-btn @click="back" :disable="isFirstQuestionActive" class="q-mt-lg" label="Back" color="secondary" />
     <q-btn v-if="isLastQuestionActive" outline @click="submitQuiz" class="q-mt-lg" label="Submit" color="accent" />
-    <q-btn v-else @click="next" class="q-mt-lg" label="Next" color="secondary" />
+    <q-btn v-else @click="next" :disable="!isCurrentQuestionAnswered" class="q-mt-lg" label="Next" color="secondary" />
   </div>
 </template>
 
@@ -16,10 +16,15 @@ const props = defineProps({
   currentQuestionIndex: {
     type: Number,
     required: true
+  },
+  currentQuestion: {
+    type: Object,
+    required: true
   }
 })
 
 const isFirstQuestionActive = computed(() => props.currentQuestionIndex === 0)
+const isCurrentQuestionAnswered = computed(() => props.currentQuestion.userAnswer)
 
 const questions = computed(() => store.getters.questions)
 const isLastQuestionActive = computed(() => props.currentQuestionIndex === questions.value.length - 1)
