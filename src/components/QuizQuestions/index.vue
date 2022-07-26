@@ -23,8 +23,11 @@ const back = ():void => {
   currentQuestionIndex.value = currentQuestionIndex.value - 1
 }
 
-const emit = defineEmits(['submitQuiz'])
+const emit = defineEmits(['changeActiveComponent'])
+const displayNextComponent = ():void => {
+  emit('changeActiveComponent', 'QuizResults')
+}
 const submitQuiz = ():void => {
-  emit('submitQuiz')
+  displayNextComponent()
 }
 </script>
