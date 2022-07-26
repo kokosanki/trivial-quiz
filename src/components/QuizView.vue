@@ -10,10 +10,12 @@
 import { ref, Ref } from 'vue'
 import QuizStart from '@/components/QuizStart.vue'
 import QuizQuestions from '@/components/QuizQuestions/index.vue'
+import QuizResults from '@/components/QuizResults/index.vue'
 
 const components = {
   QuizStart,
-  QuizQuestions
+  QuizQuestions,
+  QuizResults
 }
 
 const changeActiveComponent = (newActiveComponent: string) => {

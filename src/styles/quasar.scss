@@ -29,6 +29,14 @@ ul {
   margin-bottom: 40px;
 }
 
+.gradient-text {
+  font-family: 'Pacifico', cursive;
+  background: linear-gradient(90deg, rgba(10,167,176,1) 0%, rgba(189,12,207,1) 50%, rgba(255,0,51,1) 50%, rgba(255,193,0,1) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 @media screen and (min-width: 1024px) {
   .wrapper-component {
     background-color: $dark;
