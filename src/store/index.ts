@@ -26,6 +26,13 @@ export default createStore({
     setUserAnswer (state, answer) {
       state.questions[answer.id].userAnswer = answer.answerText
     },
+    setUserAnswerTime (state, answer) {
+      if (state.questions[answer.id].answerTime) {
+        state.questions[answer.id].answerTime = state.questions[answer.id].answerTime + answer.answerTime
+      } else {
+        state.questions[answer.id].answerTime = answer.answerTime
+      }
+    },
     setCategories (state, val) {
       state.categories = val
     }

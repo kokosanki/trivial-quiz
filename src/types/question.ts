@@ -7,6 +7,7 @@ export type Question = {
   incorrect_answers: string[]
   userAnswer?: string
   id?: number
+  answerTime?: number
 }
 
 export interface QuestionsResponse {
