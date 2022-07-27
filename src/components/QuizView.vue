@@ -32,7 +32,7 @@ const activeComponent: Ref<string> = ref('QuizStart')
 }
 @media screen and (min-width: 1024px) {
   .quiz {
-    height: 100vh;
+    padding: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
