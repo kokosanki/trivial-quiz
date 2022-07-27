@@ -5,6 +5,7 @@
     <h4 class="quiz-results__subheader">Correct answers: <span class="text-no-wrap">{{ correctAnswers }} / {{ questions.length }}</span></h4>
     <ResultsPercantageChart :quizPercentageResult="quizPercentageResult" />
     <UserMessage :quizPercentageResult="quizPercentageResult" />
+    <QuizAnswersResults />
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 import ResultsPercantageChart from '@/components/QuizResults/ResultsPercantageChart.vue'
 import UserMessage from '@/components/QuizResults/UserMessage.vue'
+import QuizAnswersResults from '@/components/QuizResults/QuizAnswersResults.vue'
 
 const store = useStore()
 
@@ -41,7 +43,7 @@ const quizPercentageResult = computed(() => {
   margin-bottom: 20px;
   }
   &__subheader {
-    font-size: $prominent;
+    font-size: $big;
     margin-bottom: 20px;
   }
 }
