@@ -1,4 +1,5 @@
 export type Answer = {
   id: number,
-  answerText: string
+  answerText?: string
+  answerTime?: number
 }

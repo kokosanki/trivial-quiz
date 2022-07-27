@@ -6,10 +6,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, Ref, computed } from 'vue'
+import { ref, Ref, computed, watch, onBeforeUnmount } from 'vue'
 import { useStore } from 'vuex'
 import NavigationButtons from '@/components/QuizQuestions/NavigationButtons.vue'
 import QuizQuestion from '@/components/QuizQuestions/QuizQuestion.vue'
+import { Answer } from '@/types/answer'
 const store = useStore()
 
 const questions = computed(() => store.getters.questions)
@@ -29,5 +30,37 @@ const displayNextComponent = ():void => {
 }
 const submitQuiz = ():void => {
   displayNextComponent()
+}
+
+const setUserAnswerTime = (answer: Answer) => {
+  store.commit('setUserAnswerTime', answer)
+}
+
+const startTime: Ref<number> = ref(0)
+watch(currentQuestionIndex, (questionIndex, prevQuestionIndex) => {
+  if (questions.value.length) {
+    if (startTime.value) {
+      calculateTime(prevQuestionIndex)
+      startTime.value = new Date().getTime()
+    } else {
+      startTime.value = new Date().getTime()
+    }
+  }
+}, { immediate: true })
+
+onBeforeUnmount(() => {
+  calculateTime(currentQuestionIndex.value)
+})
+
+const calculateTime = (questionIndex) => {
+  const endTime: Ref<number> = ref(new Date().getTime())
+  let timeDiff = endTime.value - startTime.value
+  timeDiff /= 1000
+  const seconds = Math.round(timeDiff)
+  const answerObject = {
+    id: questionIndex,
+    answerTime: seconds
+  }
+  setUserAnswerTime(answerObject)
 }
 </script>
