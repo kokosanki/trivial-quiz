@@ -6,6 +6,7 @@
     <ResultsPercantageChart :quizPercentageResult="quizPercentageResult" />
     <UserMessage :quizPercentageResult="quizPercentageResult" />
     <QuizAnswersResults />
+    <q-btn @click="takeAnotherQuiz" class="quiz-results__button q-mt-lg" label="Take another quiz" color="secondary" />
   </div>
 </template>
 
@@ -16,23 +17,26 @@ import { useStore } from 'vuex'
 import ResultsPercantageChart from '@/components/QuizResults/ResultsPercantageChart.vue'
 import UserMessage from '@/components/QuizResults/UserMessage.vue'
 import QuizAnswersResults from '@/components/QuizResults/QuizAnswersResults.vue'
+const emit = defineEmits(['changeActiveComponent'])
 
 const store = useStore()
 
 const questions = computed(() => store.getters.questions)
 
-const correctAnswers = computed(() => {
-  return questions.value.reduce((accumulator, currentValue) => {
-    if (currentValue.userAnswer === currentValue.correct_answer) {
-      accumulator = accumulator + 1
-    }
-    return accumulator
-  }, 0)
-})
+const correctAnswers = computed(() => store.getters.correctAnswers)
 
 const quizPercentageResult = computed(() => {
   return Math.round((correctAnswers.value / questions.value.length) * 100)
 })
+
+const resetQuestions = ():void => {
+  store.commit('resetQuestions')
+}
+
+const takeAnotherQuiz = ():void => {
+  resetQuestions()
+  emit('changeActiveComponent', 'QuizStart')
+}
 </script>
 
 <style lang="scss" scoped>
@@ -45,6 +49,9 @@ const quizPercentageResult = computed(() => {
   &__subheader {
     font-size: $big;
     margin-bottom: 20px;
+  }
+  &__button {
+    font-size: $sleek;
   }
 }
 </style>
