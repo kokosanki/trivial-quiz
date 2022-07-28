@@ -36,6 +36,9 @@ export default createStore({
       })
       state.questions = questions
     },
+    resetQuestions (state) {
+      state.questions = []
+    },
     setUserAnswer (state, answer) {
       state.questions[answer.id].userAnswer = answer.answerText
     },
