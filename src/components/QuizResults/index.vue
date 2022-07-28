@@ -21,14 +21,7 @@ const store = useStore()
 
 const questions = computed(() => store.getters.questions)
 
-const correctAnswers = computed(() => {
-  return questions.value.reduce((accumulator, currentValue) => {
-    if (currentValue.userAnswer === currentValue.correct_answer) {
-      accumulator = accumulator + 1
-    }
-    return accumulator
-  }, 0)
-})
+const correctAnswers = computed(() => store.getters.correctAnswers)
 
 const quizPercentageResult = computed(() => {
   return Math.round((correctAnswers.value / questions.value.length) * 100)

@@ -48,8 +48,13 @@ watch(currentQuestionIndex, (questionIndex, prevQuestionIndex) => {
   }
 }, { immediate: true })
 
+const storeQuizResults = ():void => {
+  store.dispatch('storeQuizResults')
+}
+
 onBeforeUnmount(() => {
   calculateTime(currentQuestionIndex.value)
+  storeQuizResults()
 })
 
 const calculateTime = (questionIndex) => {

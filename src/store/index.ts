@@ -5,7 +5,7 @@ export default createStore({
   state: {
     categories: [],
     questions: [],
-    userAnswers: []
+    userResults: []
   } as StoreType,
   getters: {
     questionCategories (state) {
@@ -13,6 +13,19 @@ export default createStore({
     },
     questions (state) {
       return state.questions
+    },
+    timeSpentOnQuiz (state) {
+      return state.questions.reduce((accumulator, currentValue) => {
+        return accumulator + (currentValue.answerTime || 0)
+      }, 0)
+    },
+    correctAnswers (state) {
+      return state.questions.reduce((accumulator, currentValue) => {
+        if (currentValue.userAnswer === currentValue.correct_answer) {
+          accumulator = accumulator + 1
+        }
+        return accumulator
+      }, 0)
     }
   },
   mutations: {
@@ -35,9 +48,19 @@ export default createStore({
     },
     setCategories (state, val) {
       state.categories = val
+    },
+    storeQuizResults (state, val) {
+      state.userResults.push(val)
     }
   },
   actions: {
+    storeQuizResults (context) {
+      context.commit('storeQuizResults', {
+        questionsAmount: context.state.questions.length,
+        correctAnswersAmount: context.getters.correctAnswers,
+        timeLength: context.getters.timeSpentOnQuiz
+      })
+    }
   },
   modules: {
   }
